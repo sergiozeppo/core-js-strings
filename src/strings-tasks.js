@@ -37,8 +37,11 @@ function getStringLength(value) {
  *   isString('test') => true
  *   isString(new String('test')) => true
  */
-function isString(/* value */) {
-  throw new Error('Not implemented');
+function isString(value) {
+  if (typeof value === 'string' || value instanceof String) {
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -147,7 +150,10 @@ function repeatString(str, times) {
  *   removeFirstOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
 function removeFirstOccurrences(str, value) {
-  return str.slice(str.indexOf(value));
+  return (
+    str.slice(0, str.indexOf(value)) +
+    str.slice(str.indexOf(value) + value.length)
+  );
 }
 
 /**
@@ -372,8 +378,14 @@ function reverseWords(str) {
  *   invertCase('JavaScript is Fun') => 'jAVAsCRIPT IS fUN'
  *   invertCase('12345') => '12345'
  */
-function invertCase(/* str */) {
-  throw new Error('Not implemented');
+function invertCase(str) {
+  const strChar = str.split('');
+  const result = [];
+  for (let i = 0; i < strChar.length; i += 1)
+    if (strChar[i] === strChar[i].toUpperCase()) {
+      result[i] = strChar[i].toLowerCase();
+    } else result[i] = strChar[i].toUpperCase();
+  return result.join('');
 }
 
 /**
