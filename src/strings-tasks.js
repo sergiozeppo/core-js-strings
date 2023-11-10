@@ -150,10 +150,10 @@ function repeatString(str, times) {
  *   removeFirstOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
 function removeFirstOccurrences(str, value) {
-  return (
-    str.slice(0, str.indexOf(value)) +
-    str.slice(str.indexOf(value) + value.length)
-  );
+  return str.includes(value)
+    ? str.slice(0, str.indexOf(value)) +
+        str.slice(str.indexOf(value) + value.length)
+    : str;
 }
 
 /**
@@ -168,8 +168,11 @@ function removeFirstOccurrences(str, value) {
  *   removeLastOccurrences('I like legends', 'end') => 'I like legs'.
  *   removeLastOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
-function removeLastOccurrences(/* str, value */) {
-  throw new Error('Not implemented');
+function removeLastOccurrences(str, value) {
+  return str.includes(value)
+    ? str.slice(0, str.lastIndexOf(value)) +
+        str.slice(str.lastIndexOf(value) + value.length)
+    : str;
 }
 
 /**
@@ -415,8 +418,8 @@ function getStringFromTemplate(firstName, lastName) {
  *   extractNameFromTemplate('Hello, John Doe!') => 'John Doe'
  *   extractNameFromTemplate('Hello, Chuck Norris!') => 'Chuck Norris'
  */
-function extractNameFromTemplate(/* value */) {
-  throw new Error('Not implemented');
+function extractNameFromTemplate(value) {
+  return value.replace('Hello, ', '').replace('!', '');
 }
 
 /**
