@@ -337,11 +337,7 @@ function isPalindrome(str) {
     .replaceAll('?', '')
     .replaceAll('!', '')
     .toLowerCase();
-  const reversedString = normalString
-    .split('')
-    .reverse()
-    .join('')
-    .toLowerCase();
+  const reversedString = normalString.split('').reverse().join('');
   if (normalString === reversedString) {
     return true;
     // eslint-disable-next-line no-else-return
@@ -495,8 +491,16 @@ function extractEmails(str) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  const normalString =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz?!, ';
+  const encoded = 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm?!, ';
+  // eslint-disable-next-line prefer-const
+  let searchStr = str.split('');
+  for (let i = 0; i < str.length; i += 1) {
+    searchStr[i] = encoded[normalString.indexOf(searchStr[i])];
+  }
+  return searchStr.join('');
 }
 
 /**
@@ -524,7 +528,7 @@ function encodeToRot13(/* str */) {
  *   'K♠' => 51
  */
 function getCardId(value) {
-  const cardsMap = new Map();
+  let result;
   const cards = [
     'A♣',
     '2♣',
@@ -580,9 +584,9 @@ function getCardId(value) {
     'K♠',
   ];
   for (let i = 0; i < cards.length; i += 1) {
-    cardsMap.set(cards[i], i);
+    if (cards[i] === value) result = i;
   }
-  return cardsMap.get(value);
+  return result;
 }
 
 module.exports = {
